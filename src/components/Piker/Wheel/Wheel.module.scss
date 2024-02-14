@@ -1,0 +1,13 @@
+
+
+.wheel{
+  position: relative;
+  //width: 100px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y mandatory;
+}

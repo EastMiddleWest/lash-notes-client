@@ -1,0 +1,38 @@
+@use '../../../styles/colors.scss';
+
+.wrapper{
+  position: relative;
+  background-color: colors.$dark-green;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 5px;
+  padding: 0.35em;
+  border-radius: 3px;
+  //width: fit-content;
+  span{
+    color: #fff;
+  }
+  &::before{
+    position: absolute;
+    content: '';
+    display: block;
+    top: 3px;
+    left: 0;
+    height: 45px;
+    width: 100%;
+    backdrop-filter: blur(1px);
+    z-index: 10;
+  }
+  &::after{
+    position: absolute;
+    content: '';
+    display: block;
+    bottom: 3px;
+    left: 0;
+    height: 45px;
+    width: 100%;
+    backdrop-filter: blur(1px);
+    z-index: 10;
+  }
+}

@@ -1,0 +1,10 @@
+@use '../../styles/colors.scss';
+
+.app{
+  background-color: colors.$middle-green;
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

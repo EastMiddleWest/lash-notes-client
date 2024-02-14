@@ -1,0 +1,27 @@
+@use '../../styles/colors.scss';
+
+.wrapper{
+  position: absolute;
+  right: 1px;
+  top: 0;
+}
+
+.container{
+  position: relative;
+  display: flex;
+}
+
+.master1, .master2{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.master1{
+  background-color: colors.$gucci-red;
+  transform: translate(50%,-50%);
+}
+
+.master2{
+  background-color: colors.$gucci-green;
+}

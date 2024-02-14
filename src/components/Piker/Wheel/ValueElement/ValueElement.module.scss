@@ -1,0 +1,25 @@
+
+
+.hour{
+  flex: 0 0 50px;
+  min-width: 40px;
+  scroll-snap-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: visible;
+  transition: 0.35s;
+  font-size: 1.5em;
+  padding: 0 0.5em;
+}
+
+.selected{
+  color: #fff;
+  // P{
+  //   font-weight: 600;
+  // }
+}
+
+.not-selected{
+  color: rgb(177, 175, 175);
+}

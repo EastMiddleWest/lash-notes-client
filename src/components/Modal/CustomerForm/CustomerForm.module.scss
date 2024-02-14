@@ -1,0 +1,58 @@
+@use '../../../styles/colors.scss';
+
+
+.container{
+  padding: 2em;
+  background-color: colors.$azureish_white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5em;
+  input{
+    padding: 1em;
+    border: 2px solid colors.$polished_pine;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1em;
+    font-family: inherit;
+  }
+  textarea{
+    padding: 1em;
+    border: 2px solid colors.$polished_pine;
+    border-radius: 5px;
+    min-height: 150px;
+    font-size: 1.25em;
+  }
+}
+
+.btn{
+  padding: 1em 2em;
+  border-radius: 4px;
+  background-color: colors.$polished_pine;
+  color:#fff;
+  font-size: 1.2em;
+  &-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &:has( > :only-child){
+      justify-content: flex-end;
+    }
+  }
+  &_close{
+    padding: 0.75em;
+    background-color: colors.$polished_pine;
+    width: fit-content;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+  }
+  &_delete{
+    padding: 0.75em;
+    background-color: colors.$gucci-red;
+    width: fit-content;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+  }
+}

@@ -1,0 +1,44 @@
+
+.table{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.head{
+  display: flex;
+  height: 50px;
+  span{
+    width: 50px;
+  }
+  div{
+    flex-grow: 1;
+    font-size: 1.5em;
+    color: #fff;
+  }
+}
+
+.timelist >*{
+  height: 70px;
+  color: #fff;
+}
+
+.timelist :first-child{
+  border-top: 1px solid #ffffff83;
+}
+
+.timelist > *:not(:last-child){
+  border-bottom: 1px solid #ffffff83;
+}
+
+.container{
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  //background-color: rgba(37, 37, 37, 0.582);
+  //padding: 0 0.5em;
+}

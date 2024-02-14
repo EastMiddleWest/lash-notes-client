@@ -1,0 +1,54 @@
+@use '../../styles/colors.scss';
+
+.container{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: colors.$grey;
+}
+
+.week{
+  display: flex;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid #c7c7c7;
+}
+
+.flex{
+  display: grid;
+  grid-template-columns: repeat(7,1fr);
+  gap: 2px;
+}
+
+.dayName{
+  flex-grow: 1;
+  padding: 0.5em;
+  //background-color: colors.$middle-green;
+  color: #000;
+  text-align: center;
+}
+
+.day{
+  position: relative;
+  padding: 0.75em 0;
+  color: #000;
+  & > h3{
+    font-weight: 500;
+    &:not(.default){
+      color:#919191;
+    }
+  }
+  & > .today{
+    color: colors.$light-green;
+    position: relative;
+    &::after{
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      width: 35px;
+      height: 35px;
+      border: 2px solid colors.$light-green;
+      border-radius: 4px;
+    }
+  }
+}

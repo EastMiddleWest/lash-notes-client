@@ -1,0 +1,28 @@
+@use '../../styles/colors.scss';
+
+.header{
+  position: relative;
+  width: 100%;
+  padding: 1em;
+  background-color: colors.$dark-green;
+  display: flex;
+  justify-content: space-between;
+  button{
+    padding: 0.5em;
+    border: 1px solid #000;
+    background-color: colors.$light-green;
+    border-radius: 5px;
+    display: grid;
+    place-content: center;
+  }
+  a{
+    display: grid;
+    place-content: center;
+  }
+}
+
+.btn_container{
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
