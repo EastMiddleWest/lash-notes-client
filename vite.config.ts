@@ -10,22 +10,22 @@ const manifestForPlugIn: Partial<VitePWAOptions>= {
     description:"Lash notes vite app",
     icons:[
       {
-      src: '/icons/icon-144.png',
+      src: '/icon-144.png',
       sizes:'144x144',
       type:'image/png',
     },
     {
-      src: '/icons/icon-192.png',
+      src: '/icon-192.png',
       sizes:'192x192',
       type:'image/png',
     },
     {
-      src: '/icons/icon-256.png',
+      src: '/icon-256.png',
       sizes:'256x256',
       type:'image/png',
     },
     {
-      src: '/icons/icon-384.png',
+      src: '/icon-384.png',
       sizes:'384x384',
       type:'image/png',
     },
