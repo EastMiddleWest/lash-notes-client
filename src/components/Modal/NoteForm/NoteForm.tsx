@@ -1,87 +1,127 @@
 import React from 'react'
 import styles from './NoteForm.module.scss'
+import { useForm, SubmitHandler, Controller } from "react-hook-form"
 import DatePicker from '../../Piker/DatePicker/DatePicker'
 import TimePicker from '../../Piker/TimePicker/TimePicker'
 import RemoveButton from '../../RemoveButton/RemoveButton'
+import ClientSelect from '../../ClientSelect/ClientSelect'
 
 import { StateContext } from '../../../App'
-import ApiController from '../../../controllers/apiController'
+import ApiController, { type NoteData} from '../../../controllers/apiController'
 
-import type {INote} from '../../../types'
+import type {NoteFormProps, Inputs } from './NoteForm.types'
 
-type NoteFormProps = {
-  type: 'add note' | 'update note';
-  handleClose: () => void;
-  defaultData: INote;
-}
+const monthes = ['','Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек']
 
-const monthes = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек']
 
 const NoteForm = ({type, handleClose, defaultData}: NoteFormProps) => {
 
   const {dispatch} = React.useContext(StateContext)
 
-  const [timeFrom, setTimeFrom] = React.useState(defaultData.time.from)
-  const [timeTo, setTimeTo] = React.useState(defaultData.time.to)
-  const [master, setMaster] = React.useState(defaultData.master)
-  const [month, setMonth] = React.useState(monthes[Number(+defaultData.month-1)])
-  const [day, setDay] = React.useState(defaultData.day)
-  const [year, setYear] = React.useState(defaultData.year)
-  const [content, setContent] = React.useState(defaultData.content)
-  const [error, setError] = React.useState('')
-
-  const handleSetMaster = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMaster(e.target.value)
+  const defaultValues: Inputs = {
+    date:{
+      day: defaultData.day,
+      month: defaultData.month,
+      year: defaultData.year,
+    },
+    time: defaultData.time,
+    client: defaultData.client._id ? {value: defaultData.client._id, label: defaultData.client.name} : null,
+    master: defaultData.master,
+    content: defaultData.content
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if(timeTo <= timeFrom || !content){
-      setError('Пожалуйста заполните все поля')
-      return
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<Inputs>({defaultValues})
+
+
+
+  const onSubmit: SubmitHandler<Inputs> = async (formData, event) => {
+    event?.preventDefault()
+    const data: NoteData = {
+      ...formData,
+      year: formData.date.year,
+      month: formData.date.month,
+      day: formData.date.day,
+      client: formData.client?.__isNew__ ? {name: formData.client.value} : formData.client!.value
     }
-    const data: Omit<INote, '_id'> = {
-      year,
-      day,
-      month: String(monthes.indexOf(month)+1),
-      time: {
-        from: timeFrom,
-        to: timeTo
-      },
-      master,
-      content
-    }
+
     if(type === 'add note'){
-      dispatch({type: 'toggleLoading', payload: true})
-      const note = await ApiController.addNote(data)
-      note && dispatch({type:'addNote',payload: note})
-      handleClose()
-      dispatch({type: 'toggleLoading', payload: false})
+      dispatch({type: 'toggleLoadingState', payload: true})
+      try {
+        const note = await ApiController.addNote(data)
+        if(note){
+          dispatch({type:'addNote',payload: note})
+          dispatch({type: 'toggleLoadingResult', payload: 'succes'})
+        }
+        else {
+          dispatch({type: 'toggleLoadingResult', payload: 'error'})
+        }
+        //note && dispatch({type:'addNote',payload: note})
+      } catch (error) {
+        console.log(error)
+        dispatch({type: 'toggleLoadingResult', payload: 'error'})
+      }
+      finally{
+        handleClose()
+        //dispatch({type: 'toggleLoadingState', payload: false})
+      }
     } else{
-      dispatch({type: 'toggleLoading', payload: true})
-      const note = await ApiController.updateNote(data, defaultData._id)
-      note && dispatch({type:'updateNote',payload: note})
-      handleClose()
-      dispatch({type: 'toggleLoading', payload: false})
+      dispatch({type: 'toggleLoadingState', payload: true})
+      try {
+        const note = await ApiController.updateNote(data, defaultData._id)
+        //note && dispatch({type:'updateNote',payload: note})
+        if(note){
+          dispatch({type:'updateNote',payload: note})
+          dispatch({type: 'toggleLoadingResult', payload: 'succes'})
+        }
+        else {
+          dispatch({type: 'toggleLoadingResult', payload: 'error'})
+        }
+      } catch (error) {
+        console.log(error)
+        dispatch({type: 'toggleLoadingResult', payload: 'error'})
+      }
+      finally{
+        handleClose()
+        //dispatch({type: 'toggleLoadingState', payload: false})
+      }
     }
   }
 
   const removeNote = async () => {
     const id = defaultData._id
-    dispatch({type: 'toggleLoading', payload: true})
-    const deletedNoteId = await ApiController.deleteNote(id)
-    deletedNoteId && dispatch({type: 'deleteNote', payload: deletedNoteId})
-    handleClose()
-    dispatch({type: 'toggleLoading', payload: false})
+    dispatch({type: 'toggleLoadingState', payload: true})
+    try {
+      const deletedNoteId = await ApiController.deleteNote(id)
+      if(deletedNoteId) {
+        dispatch({type: 'deleteNote', payload: deletedNoteId})
+        dispatch({type: 'toggleLoadingResult', payload: 'succes'})
+      }
+      else dispatch({type: 'toggleLoadingResult', payload: 'error'})
+    } catch (error) {
+      console.log(error)
+      dispatch({type: 'toggleLoadingResult', payload: 'error'})
+    }
+    finally{
+      handleClose()
+      //dispatch({type: 'toggleLoadingState', payload: false})
+    }
   }
+
+  register('time.to',{validate: (value, formValues) => value > formValues.time.from})
+
 
 
   return (
-    <form className={styles.container} onSubmit={handleSubmit}>
+    <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.btn_container}>
         {type === 'update note' && <RemoveButton handler={removeNote} />}
         <button type='button' className={styles.btn_close} onClick={handleClose} >
-          <img src='/close-white.png' />
+          <img src='/src/assets/close-white.png' width={26} height={26} />
         </button>
       </div>
       <h2>{type === 'add note' ? 'Новая заметка' : 'Редактировать'}</h2>
@@ -89,51 +129,86 @@ const NoteForm = ({type, handleClose, defaultData}: NoteFormProps) => {
         <p>Мастер:</p>
         <div className={styles.radio_container}>
           <input
+            {...register('master')}
             type='radio'
             name='master'
             id='master1'
             value={'Катя'}
-            onChange={handleSetMaster}
-            checked={master === 'Катя'}
             className={styles.radio}
           />
           <label htmlFor='master1'>Катя</label>
         </div>
         <div className={styles.radio_container}>
           <input
+            {...register('master')}
             type='radio'
             name='master'
             id='master2'
             value={'Лена'}
-            onChange={handleSetMaster}
-            checked={master === 'Лена'}
             className={styles.radio}
             />
           <label htmlFor='master2'>Лена</label>
         </div>
       </div>
       <div className={styles.time}>
-        <TimePicker key={'from'} timeValue={timeFrom} changeTime={setTimeFrom}/>
-        <TimePicker key={'to'} timeValue={timeTo} changeTime={setTimeTo}/>
+        <Controller
+          control={control}
+          name='time.from'
+          render={({field}) =>
+            <TimePicker
+            key={'from'}
+            timeValue={field.value}
+            changeTime={(time) => field.onChange(time)}
+          />}
+        />
+        <div className={errors.time?.to ? styles['time-error'] : ''}>
+        <Controller
+          control={control}
+          name='time.to'
+          render={({field})=>
+          <TimePicker
+            key={'to'}
+            timeValue={field.value}
+            changeTime={(time) => field.onChange(time)}
+          />}
+        />
+        </div>
       </div>
-      <DatePicker
-        dayValue={day}
-        monthValue={month}
-        yearValue={year}
-        changeDay={setDay}
-        changeMonth={setMonth}
-        changeYear={setYear}
+      <Controller
+      control={control}
+      name='date'
+      render={({field}) =>
+        <DatePicker
+          dayValue={field.value.day}
+          monthValue={monthes[Number(field.value.month)]}
+          yearValue={field.value.year}
+          changeDay={(day) => field.onChange({...field.value, day})}
+          changeMonth={(month) => field.onChange({...field.value, month: String(monthes.indexOf(month))})}
+          changeYear={(year) => field.onChange({...field.value, year})}
         />
-        <textarea
-          className={styles.area}
-          placeholder='Текст'
-          value={content}
-          onChange={e => setContent(e.target.value)}
-        />
-        {error && <p className={styles.error}>{error}</p>}
-        <button type='submit' className={styles.btn} >
-          {type === 'add note' ? 'Создать' : 'Редактировать'}
-        </button>
+      }
+      />
+      <Controller
+        name='client'
+        control={control}
+        rules={{required: true, validate: (value) => {return !!value}}}
+        render={({field,fieldState}) =>
+          <ClientSelect
+          value={field.value}
+          error={!!fieldState.error}
+          onChange={(newValue) => field.onChange(newValue)}
+          />
+        }
+      />
+      <textarea
+        {...register('content',{required: true})}
+        className={styles.area}
+        placeholder='Текст'
+        aria-invalid={!!errors.content}
+      />
+      <button type='submit' className={styles.btn} >
+        {type === 'add note' ? 'Создать' : 'Редактировать'}
+      </button>
     </form>
   )
 }

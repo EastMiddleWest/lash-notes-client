@@ -2,15 +2,23 @@ import type {INote} from '../types'
 
 
 export type DataState = {
-  isLoading: boolean;
+  isLoading: {
+    state: boolean;
+    result: 'succes' | 'error' | undefined
+  };
   year: string;
   month: string;
   days: Record<string,INote[]>;
 }
 
-type ToggleLoadingAction = {
-  type: 'toggleLoading',
+type ToggleLoadingStateAction = {
+  type: 'toggleLoadingState',
   payload: boolean
+}
+
+type ToggleLoadingResultAction = {
+  type: 'toggleLoadingResult',
+  payload: 'succes' | 'error'
 }
 
 type SetNotesAction = {
@@ -42,7 +50,8 @@ type DeleteNoteAction = {
 }
 
 export type Action =
-| ToggleLoadingAction
+| ToggleLoadingStateAction
+| ToggleLoadingResultAction
 | SetDateAction
 | SetNotesAction
 | AddNoteAction
@@ -61,7 +70,10 @@ export type Action =
 // }
 
 export const initState: DataState = {
-  isLoading: false,
+  isLoading: {
+    state: false,
+    result: undefined
+  },
   year: '',
   month: '',
   days: {}
@@ -78,19 +90,19 @@ const generateMonthData = (payload: INote[]): DataState['days'] => {
 
 export const reducer: React.Reducer<DataState, Action> = (state, action) => {
   switch (action.type) {
-    case 'toggleLoading':{
-      //console.log('toggle loading to: ', action.payload)
-      return {...state, isLoading: action.payload}
+    case 'toggleLoadingState':{
+      return {...state, isLoading: {state:action.payload, result: undefined}}
+    }
+    case 'toggleLoadingResult':{
+      return {...state, isLoading: {state:state.isLoading.state, result: action.payload}}
     }
     case 'setNotes':{
-      //console.log('set notes from data: ', action.payload)
       return {
         ...state,
         days: generateMonthData(action.payload)
       }
     }
     case 'setDate':{
-      //console.log('set date from: ', action.payload)
       return {
         ...state,
         year: action.payload.year,

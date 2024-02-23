@@ -1,0 +1,39 @@
+@use '../../styles/colors.scss';
+
+.wrapper{
+  width: 100%;
+}
+
+.error{
+  border: 2px solid colors.$gucci-red;
+}
+
+.control{
+  border: 2px solid;
+  padding: 0.5em;
+  border-color: colors.$dark-green;
+  caret-color: colors.$dark-green;
+  color: colors.$dark-green;
+  font-weight: 600;
+  &-focused{
+    border-color: colors.$light-green;
+  }
+  &-error{
+    border-color: colors.$gucci-red;
+  }
+}
+
+.menu{
+  transform: translateY(10%);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: colors.$gucci-green;
+  color: white;
+  &list > *{
+    padding: 0.5em;
+    background-color: transparent;
+    transition: all 0.5s;
+    &[aria-selected='true']{
+      background-color: colors.$polished_pine;
+    }
+  }
+}

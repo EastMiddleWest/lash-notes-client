@@ -7,14 +7,27 @@ export interface INote{
     from: string;
     to: string;
   }
+  client: Pick<ICustomer, '_id' | 'name'>
   master: string;
   content: string;
+}
+
+type TelegramContact = {
+  chatId: number;
+  firstName: string;
+  username: string;
+}
+
+type ClientContacts = {
+  telegram?: TelegramContact
+  phone?: string
 }
 
 export interface ICustomer {
   _id: string;
   name: string;
-  content: string;
+  contacts: ClientContacts;
+  notes: INote[]
 }
 
 type AddNoteAction = {
@@ -27,14 +40,24 @@ type UpdateNoteAction = {
   defaultData: INote
 }
 
+export type CustomerData = {
+  id: string;
+  name: string;
+  contacts:{
+    telegram: string;
+    phone: string
+  }
+}
+
 type AddCustomerAction = {
   type: 'add customer';
-  defaultData: ICustomer
+  defaultData: CustomerData;
 }
 
 type UpdateCustomerAction = {
   type: 'update customer';
-  defaultData: ICustomer
+  defaultData: CustomerData;
+  onSubmit: (data: ICustomer) => void
 }
 
 type ModalAction =

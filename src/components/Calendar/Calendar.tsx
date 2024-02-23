@@ -26,12 +26,14 @@ const Calendar = () => {
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toDateString()
 
   const clName =(today: boolean, isDefault: boolean) => classNames({
-    [styles.today]: today && (new Date()).getMonth().toString() === state.month,
+    [styles.today]: today && String(+(new Date()).getMonth()+1) === state.month,
     [styles.default]: isDefault
   })
 
   const notesInDay = (day: Date, master: 'Катя' | 'Лена') => {
-    return String(day.getMonth()+1) === state.month && state.days[day.getDate().toString()]?.some(note => note.master === master)
+    const isSameMonth = String(day.getMonth()+1) === state.month
+    const isNotesExists = state.days[day.getDate().toString()]?.some(note => note.master === master)
+    return isSameMonth && isNotesExists
   }
 
   return (
@@ -45,7 +47,12 @@ const Calendar = () => {
       </div>
       <div className={styles.flex}>
         {calendarData.map(el =>
-          <Link to={`/${el.toLocaleDateString()}`} key={el.toString()} state={{prev: pathname}}>
+          <Link
+            to={`/${el.getDate()}.${String(el.getMonth()+1)}.${el.getFullYear()}`}
+            key={el.toString()}
+            state={{prev: pathname}}
+            className={styles.link}
+          >
             <div className={styles.day}>
               <Tooltip
                 master1={notesInDay(el, 'Катя')}

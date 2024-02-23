@@ -14,12 +14,19 @@ const Modal = ({handleClose, action }: ModalProps) => {
     }
   },[])
 
+
   return (
     <div className={styles.wrapper}>
-      {action.type === 'add note' || action.type === 'update note' ?
+      {action.type === 'add note' ?
         <NoteForm type={action.type} handleClose={handleClose} defaultData={action.defaultData} />
         :
+      action.type === 'update note' ?
+        <NoteForm type={action.type} handleClose={handleClose} defaultData={action.defaultData} />
+        :
+      action.type ==='add customer' ?
         <CustomerForm type={action.type} handleClose={handleClose} defaultData={action.defaultData} />
+        :
+        <CustomerForm type={action.type} handleClose={handleClose} defaultData={action.defaultData} onSubmit={action.onSubmit}  />
       }
     </div>
   )

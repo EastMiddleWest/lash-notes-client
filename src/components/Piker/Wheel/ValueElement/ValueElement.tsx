@@ -12,7 +12,10 @@ type ValueElementProps = {
 const ValueElement = React.forwardRef<HTMLDivElement, ValueElementProps>(({value, handler}, ref) => {
 
   const handleChange = (inV:boolean) => {
-    if(inV) handler(value)
+    if(inV){
+      //console.log('in view: ', value)
+      handler(value)
+    }
   }
 
   const { ref: inViewRef, inView } = useInView({

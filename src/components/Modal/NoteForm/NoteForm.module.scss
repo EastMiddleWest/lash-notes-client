@@ -75,15 +75,28 @@
   justify-content: space-between;
   align-items: center;
   gap: 1em;
+  &-error{
+    border-radius: 4px;
+    box-shadow: rgba(117, 11, 9, 0.7) 0px 1px 2px 0px, rgba(117, 11, 9, 0.7) 0px 2px 6px 2px;
+  }
 }
 
 .area{
   box-sizing: border-box;
   padding: 0.5em;
-  border: 2px solid colors.$light-green;
-  border-radius: 8px;
+  border: 2px solid colors.$dark-green;
+  //border-radius: 8px;
   min-height: 100px;
   font-size: 1.25em;
+  &:focus-visible{
+    border-color: colors.$light-green;
+    outline: none;
+    //rgba(60, 64, 67, 0.15)
+    box-shadow: rgba(71, 112, 94, 0.5) 0px 1px 2px 0px, rgba(71, 112, 94, 0.5) 0px 2px 6px 2px;
+  }
+  &[aria-invalid='true']{
+    border-color: colors.$gucci-red;
+  }
 }
 
 .btn{
@@ -111,8 +124,4 @@
     display: grid;
     place-content: center;
   }
-}
-
-.error{
-  color: colors.$gucci-red;
 }

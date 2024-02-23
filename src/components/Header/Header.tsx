@@ -14,7 +14,7 @@ const Header = ({toggleModal}: HeaderProps) => {
   const {pathname} = useLocation()
 
   const handleShowAddModal = () => {
-    if(pathname === '/'){
+    if(pathname.match(/[a-zA-Z]/)){
       const today = new Date()
       toggleModal({
         type: 'add note',
@@ -27,6 +27,10 @@ const Header = ({toggleModal}: HeaderProps) => {
             from: '08:00',
             to: '09:00'
           },
+          client: {
+            _id: '',
+            name: ''
+          },
           master:'Катя',
           content: ''
         }
@@ -38,11 +42,15 @@ const Header = ({toggleModal}: HeaderProps) => {
         defaultData:{
           _id: '',
           day: String(+date[0]),
-          month: String(date[1]),
+          month: String(+date[1]),
           year: String(date[2]),
           time:{
             from: '08:00',
             to: '09:00'
+          },
+          client: {
+            _id: '',
+            name: ''
           },
           master:'Катя',
           content: ''
@@ -51,33 +59,23 @@ const Header = ({toggleModal}: HeaderProps) => {
     }
   }
 
-  // const openCutomerModal = () => {
-  //   toggleModal({
-  //     type: 'add customer',
-  //     defaultData: {
-  //       _id: '',
-  //       name: '',
-  //       content: ''
-  //     }
-  //   })
-  // }
 
   return (
     <header className={styles.header}>
       <Link to={'/'} state={{prev: pathname}}>
-        <img src='/home_white.png' />
+        <img src='/src/assets/home_white.png' />
       </Link>
       <div className={styles.btn_container}>
-        {/* <Link to={'/search'} state={{prev: pathname}}>
+        <Link to={'/clients'} state={{prev: pathname}}>
           <button>
-            <img src='public/search-icon.png' width={24} height={24} />
+          <img src='/src/assets/user-white.png' width={24} height={24} />
           </button>
-        </Link> */}
+        </Link>
         {/* <button onClick={openCutomerModal}  >
-          <img src='public/user-white.png' width={24} height={24} />
+          <img src='/src/assets/user-white.png' width={24} height={24} />
         </button> */}
         <button onClick={handleShowAddModal}  >
-          <img src='/add-white.png' width={24} height={24} />
+          <img src='/src/assets/add-white.png' width={24} height={24} />
         </button>
       </div>
     </header>

@@ -1,0 +1,11 @@
+@use '../../styles/colors.scss';
+
+.list{
+  flex-grow: 1;
+  width: 100%;
+  background-color: colors.$azureish_white;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0.5em;
+}

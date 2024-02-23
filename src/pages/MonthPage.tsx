@@ -10,16 +10,19 @@ import { motion } from "framer-motion"
 
 const MonthPage = () => {
 
-  const {dispatch} = React.useContext(StateContext)
+  const {state,dispatch} = React.useContext(StateContext)
 
   React.useEffect(()=>{
-    const today = new Date()
-    const currentMonth = String(today.getMonth()+1)
-    const currentYear = String(today.getFullYear())
-    dispatch({type: 'setDate', payload: {year: currentYear, month: currentMonth}})
+    if(!state.month || !state.year){
+      const today = new Date()
+      const currentMonth = String(today.getMonth()+1)
+      const currentYear = String(today.getFullYear())
+      dispatch({type: 'setDate', payload: {year: currentYear, month: currentMonth}})
+    }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  //eslint-disable-next-line react-hooks/exhaustive-deps
+
+  },[dispatch, state.month, state.year])
 
   const variants2 = {
     initial: {  opacity: 0},

@@ -14,6 +14,8 @@ const Wheel: React.FC<WheelProps> = ({ value, values, handler }) => {
 
   const [selected, setSelected] = React.useState("");
 
+  //console.log('Selected: ', selected)
+
   React.useEffect(() => {
     if (parentRef.current) {
       const index = values.indexOf(value) - 1;
@@ -23,7 +25,10 @@ const Wheel: React.FC<WheelProps> = ({ value, values, handler }) => {
   }, [value, values]);
 
   const setValueOnScrollStop = () => {
-    handler(selected)
+    if(value !== selected){
+      //console.log('setValueOnScrollStop: ', selected, value)
+      handler(selected)
+    }
   }
 
   useScrollStopListener(parentRef.current, () => setValueOnScrollStop(), 100)

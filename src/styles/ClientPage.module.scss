@@ -1,0 +1,44 @@
+@use './colors.scss';
+
+.wrapper{
+  flex-grow: 1;
+  width: 100%;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.container{
+  flex: 1 0 100%;
+  background-color: colors.$grey;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+}
+
+.info{
+  flex-grow: 1;
+  font-size: 1.2em;
+  &-container{
+    display: flex;
+    button{
+      display: grid;
+      place-content: center;
+      background-color: colors.$middle-green;
+      padding: 0.5em;
+      border: 1px solid #000;
+      border-radius: 5px;
+    }
+  }
+}
+
+.btn-container{
+  width: max-content;
+}
+
+.notes{
+  li{
+    margin-bottom: 0.5em;
+  }
+}

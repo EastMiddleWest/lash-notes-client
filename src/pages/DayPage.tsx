@@ -14,7 +14,7 @@ import type{ ModalProps } from '../types'
 
 type DayPageProps = {updateNote: (data: ModalProps['action']) => void}
 
-const DayPage = ({ updateNote}: DayPageProps) => {
+const DayPage = ({ updateNote }: DayPageProps) => {
 
   const {state,dispatch} = React.useContext(StateContext)
   const navigate = useNavigate()
@@ -70,7 +70,7 @@ const DayPage = ({ updateNote}: DayPageProps) => {
 
   return (
     <>
-    {!state.isLoading ?
+    {!state.isLoading.state ?
     <motion.div
       className={styles.wrapper}
       initial={getInitialVariant()}

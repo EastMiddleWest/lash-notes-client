@@ -1,0 +1,59 @@
+@use '../../../styles/colors.scss';
+
+.item{
+  font-family: "Ysabeau Office", sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em;
+  background-color: colors.$grey;
+}
+
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-weight: 500;
+  font-size: 1.25em;
+  & > button{
+    display: grid;
+    place-content: center;
+  }
+}
+
+.arrow{
+  &-down{
+    transition: all 0.35s;
+    transform: rotate(0deg);
+  }
+  &-up{
+    transition: all 0.35s;
+    transform: rotate(180deg);
+  }
+}
+
+.notelist{
+  display: flex;
+  flex-direction: column;
+  max-height: 999px;
+  overflow: hidden;
+  padding: 0;
+  &-open{
+    transition: max-height 0.5s ease-in-out;
+    max-height: 999px;
+  }
+  &-closed{
+    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+    max-height: 0;
+  }
+}
+
+.note{
+  margin: 0.25em;
+  padding: 0.5em;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  & > :first-child{
+    display: flex;
+    justify-content: space-between;
+  }
+}

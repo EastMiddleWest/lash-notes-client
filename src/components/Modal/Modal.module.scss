@@ -5,12 +5,17 @@
   top: 0;
   left: 0;
   width: 100%;
+  min-height: 100vh;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.473);
-  display: grid;
-  place-content: center;
+  // display: grid;
+  // place-content: center;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
   z-index: 99;
-  //overflow: hidden;
+  padding: 2em 1em;
+  overflow-y: scroll;
   h2{
     font-weight: 600;
     text-transform: uppercase;

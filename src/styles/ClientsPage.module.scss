@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1em;
   padding: 2em 1em;
   overflow-y: scroll;
 }
@@ -18,11 +19,14 @@
   z-index: 0;
   input[type='text']{
     padding: 1em;
-    border: 2px solid colors.$polished_pine;
+    border: 2px solid colors.$dark-green;
     border-radius: 5px;
     width: 100%;
-    font-size: 1em;
+    font-size: 1.15em;
     font-family: inherit;
+    &:focus{
+      border-color: colors.$light-green;
+    }
   }
   button{
     position: absolute;
@@ -100,4 +104,20 @@
   flex-grow: 1;
   width: 100%;
   background-color: colors.$azureish_white;
+}
+
+.head{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-btn{
+  padding: 0.5em;
+  background-color: colors.$middle-green;
+  border: 1px solid #000;
+  border-radius: 5px;
+  display: grid;
+  place-content: center;
 }

@@ -1,11 +1,18 @@
 @use './styles/colors.scss';
 
+html{
+  height: 100%;
+}
+
 body {
+  min-height: 100%;
+  height: 100%;
   margin: 0;
   box-sizing: border-box;
   background-color: #000;
+  font-family: "Ysabeau Office", sans-serif;
   #root{
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,7 +26,7 @@ body {
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  //font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
@@ -41,7 +48,10 @@ body {
 
 a{
   text-decoration: none;
+  color: inherit;
 }
+
+
 
 h1,h2,h3,h4,h5,h6{
   margin-block-start: 0;
@@ -60,4 +70,15 @@ button{
   border: none;
   background-color: transparent;
   cursor: pointer;
+}
+
+ul{
+  padding-inline-start: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+input, input:focus-visible{
+  //width: 100%;
+  outline: none;
 }
