@@ -63,19 +63,19 @@ const Header = ({toggleModal}: HeaderProps) => {
   return (
     <header className={styles.header}>
       <Link to={'/'} state={{prev: pathname}}>
-        <img src='/src/assets/home_white.png' />
+        <img src='/public/home_white.png' />
       </Link>
       <div className={styles.btn_container}>
         <Link to={'/clients'} state={{prev: pathname}}>
           <button>
-          <img src='/src/assets/user-white.png' width={24} height={24} />
+          <img src='/user-white.png' width={24} height={24} />
           </button>
         </Link>
         {/* <button onClick={openCutomerModal}  >
           <img src='/src/assets/user-white.png' width={24} height={24} />
         </button> */}
         <button onClick={handleShowAddModal}  >
-          <img src='/src/assets/add-white.png' width={24} height={24} />
+          <img src='public/add-white.png' width={24} height={24} />
         </button>
       </div>
     </header>
