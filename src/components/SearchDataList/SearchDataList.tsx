@@ -1,6 +1,4 @@
-import React from 'react'
 import styles from './SearchDataList.module.scss'
-
 import ClientItem from './ClientItem/ClientItem'
 import NoteItem from './NoteItem/NoteItem'
 
@@ -10,11 +8,14 @@ type SearchDataListProps = {
   data: INote[] | ICustomer[]
 }
 
+
 const SearchDataList = ({data}: SearchDataListProps) => {
 
   const isNoteDataType = (data: INote[] | ICustomer[]): data is INote[] => {
     return 'client' in data[0]
   }
+
+
 
   return (
     <div className={styles.list}>
