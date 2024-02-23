@@ -18,9 +18,9 @@ const RemoveButton = ({handler}: RemoveBtnProps) => {
     <div className={styles.wrapper}>
       <button className={styles.btn} type='button' onClick={toggleOpen}>
         {isOpen ?
-          <img src='/src/assets/close-white.png' width={26} height={26} />
+          <img src='/close-white.png' width={26} height={26} />
           :
-          <img src='/src/assets/delete-white.png' width={26} height={26} />
+          <img src='/delete-white.png' width={26} height={26} />
         }
       </button>
       <AnimatePresence>
@@ -35,10 +35,10 @@ const RemoveButton = ({handler}: RemoveBtnProps) => {
           >
             <p>Удалить?</p>
             <button type='button' onClick={() => setIsOpen(false)}>
-              <img src='/src/assets/deny.png' width={32} height={32} />
+              <img src='/deny.png' width={32} height={32} />
             </button>
             <button type='button' onClick={handler}>
-              <img src='/src/assets/apply.png' width={32} height={32} />
+              <img src='/apply.png' width={32} height={32} />
             </button>
           </motion.div>
         }

@@ -67,7 +67,7 @@ const ClientPage = ({toggleModal}: ClientPageProps) => {
         </div>
         <div className={styles['btn-container']}>
           <button onClick={openClientForm}>
-            <img src='/src/assets/data-recovery.png' width={24} height={24} />
+            <img src='/edit.png' width={24} height={24} />
           </button>
         </div>
       </div>

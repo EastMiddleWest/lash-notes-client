@@ -121,7 +121,7 @@ const NoteForm = ({type, handleClose, defaultData}: NoteFormProps) => {
       <div className={styles.btn_container}>
         {type === 'update note' && <RemoveButton handler={removeNote} />}
         <button type='button' className={styles.btn_close} onClick={handleClose} >
-          <img src='/src/assets/close-white.png' width={26} height={26} />
+          <img src='/close-white.png' width={26} height={26} />
         </button>
       </div>
       <h2>{type === 'add note' ? 'Новая заметка' : 'Редактировать'}</h2>

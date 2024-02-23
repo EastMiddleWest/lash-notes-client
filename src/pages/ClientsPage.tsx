@@ -38,7 +38,7 @@ const ClientsPage = ({toggleModal}: ClientsPageProps) => {
       <div className={styles.head}>
         <h2>Поиск клиентов</h2>
         <button className={styles['add-btn']} onClick={openCutomerModal} >
-          <img src='/src/assets/add-white.png' width={24} height={24} />
+          <img src='/add-white.png' width={24} height={24} />
         </button>
       </div>
       <div className={styles['input-container']}>
@@ -49,7 +49,7 @@ const ClientsPage = ({toggleModal}: ClientsPageProps) => {
           onChange={(e) => setValue(e.target.value)}
         />
         <button onClick={handler} disabled={!value}>
-          <img src='public/search-colored.png' width={28} height={28} />
+          <img src='/search-colored.png' width={28} height={28} />
         </button>
       </div>
       {/* <div className={`${styles.toggler} ${searchType === 'clients' ? styles['toggler-right'] : styles['toggler-left']}`}>

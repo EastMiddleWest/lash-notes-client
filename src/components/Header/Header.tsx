@@ -63,7 +63,7 @@ const Header = ({toggleModal}: HeaderProps) => {
   return (
     <header className={styles.header}>
       <Link to={'/'} state={{prev: pathname}}>
-        <img src='/public/home_white.png' />
+        <img src='/home_white.png' />
       </Link>
       <div className={styles.btn_container}>
         <Link to={'/clients'} state={{prev: pathname}}>
@@ -75,7 +75,7 @@ const Header = ({toggleModal}: HeaderProps) => {
           <img src='/src/assets/user-white.png' width={24} height={24} />
         </button> */}
         <button onClick={handleShowAddModal}  >
-          <img src='public/add-white.png' width={24} height={24} />
+          <img src='/add-white.png' width={24} height={24} />
         </button>
       </div>
     </header>
