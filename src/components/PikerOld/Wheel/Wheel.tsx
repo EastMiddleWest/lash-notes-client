@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Wheel.module.scss";
 import ValueElement from "./ValueElement/ValueElement";
-import { useScrollStopListener } from "../../../utilities/useScrollstopListener";
+//import { useScrollStopListener } from "../../../utilities/useScrollstopListener";
 
 import debounce from "lodash.debounce";
 
