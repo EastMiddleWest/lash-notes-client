@@ -15,6 +15,7 @@
     "@mui/material": "^5.14.20",
     "classnames": "^2.5.1",
     "framer-motion": "^11.0.3",
+    "lodash.throttle": "^4.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.50.1",
@@ -25,6 +26,7 @@
     "vite-plugin-pwa": "^0.18.1"
   },
   "devDependencies": {
+    "@types/lodash.debounce": "^4.0.9",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.10.0",

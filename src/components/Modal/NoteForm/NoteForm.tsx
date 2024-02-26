@@ -1,8 +1,10 @@
 import React from 'react'
 import styles from './NoteForm.module.scss'
 import { useForm, SubmitHandler, Controller } from "react-hook-form"
-import DatePicker from '../../Piker/DatePicker/DatePicker'
-import TimePicker from '../../Piker/TimePicker/TimePicker'
+//import DatePicker from '../../Piker/DatePicker/DatePicker'
+//import TimePicker from '../../Piker/TimePicker/TimePicker'
+import DatePicker from '../../Picker/DatePicker/DatePicker'
+import TimePicker from '../../Picker/TimePiker/TimePicker'
 import RemoveButton from '../../RemoveButton/RemoveButton'
 import ClientSelect from '../../ClientSelect/ClientSelect'
 
@@ -10,8 +12,6 @@ import { StateContext } from '../../../App'
 import ApiController, { type NoteData} from '../../../controllers/apiController'
 
 import type {NoteFormProps, Inputs } from './NoteForm.types'
-
-const monthes = ['','Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек']
 
 
 const NoteForm = ({type, handleClose, defaultData}: NoteFormProps) => {
@@ -30,14 +30,21 @@ const NoteForm = ({type, handleClose, defaultData}: NoteFormProps) => {
     content: defaultData.content
   }
 
+
+  //console.log(defaultData)
+
   const {
     register,
     handleSubmit,
     control,
+    getValues,
     formState: { errors },
   } = useForm<Inputs>({defaultValues})
 
-
+  // const onTestSubmit: SubmitHandler<Inputs> = (formData, event) => {
+  //   event?.preventDefault()
+  //   console.log(formData)
+  // }
 
   const onSubmit: SubmitHandler<Inputs> = async (formData, event) => {
     event?.preventDefault()
@@ -174,16 +181,23 @@ const NoteForm = ({type, handleClose, defaultData}: NoteFormProps) => {
         />
         </div>
       </div>
+      <div>
+        <span>{getValues('date.day')}</span>
+        <span>{getValues('date.month')}</span>
+        <span>{getValues('date.year')}</span>
+      </div>
       <Controller
       control={control}
       name='date'
       render={({field}) =>
         <DatePicker
           dayValue={field.value.day}
-          monthValue={monthes[Number(field.value.month)]}
+          //monthValue={monthes[Number(field.value.month)]}
+          monthValue={field.value.month}
           yearValue={field.value.year}
           changeDay={(day) => field.onChange({...field.value, day})}
-          changeMonth={(month) => field.onChange({...field.value, month: String(monthes.indexOf(month))})}
+          //changeMonth={(month) => field.onChange({...field.value, month: String(monthes.indexOf(month))})}
+          changeMonth={(month) => field.onChange({...field.value, month})}
           changeYear={(year) => field.onChange({...field.value, year})}
         />
       }
@@ -201,7 +215,7 @@ const NoteForm = ({type, handleClose, defaultData}: NoteFormProps) => {
         }
       />
       <textarea
-        {...register('content',{required: true})}
+        {...register('content')}
         className={styles.area}
         placeholder='Текст'
         aria-invalid={!!errors.content}

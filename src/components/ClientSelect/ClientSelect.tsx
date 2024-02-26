@@ -39,7 +39,7 @@ const ClientSelect = ({value, onChange, error}: ClientSelectProps) => {
         placeholder='Клиент'
         cacheOptions
         loadOptions={loadOptions}
-        //defaultOptions
+        defaultOptions
         components={{ DropdownIndicator }}
         isMulti={false}
         noOptionsMessage={()=> 'Начните писать'}
@@ -65,7 +65,8 @@ const ClientSelect = ({value, onChange, error}: ClientSelectProps) => {
           container: () => styles.wrapper,
           control: (props) => controlClName(props.isFocused),
           menu: () => styles.menu,
-          menuList: () => styles.menulist
+          menuList: () => styles.menulist,
+          option: () => styles.option
         }}
         />
     </div>

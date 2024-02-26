@@ -1,14 +1,13 @@
 
 import React from 'react'
 import styles from '../styles/DayPage.module.scss';
+import { motion } from "framer-motion"
 
 import TimeGrid from '../components/TimeGrid/TimeGrid'
 import MasterList from '../components/MasterList/MasterList'
 
 import { useLocation, useNavigate } from 'react-router-dom'
 import { StateContext } from '../App'
-
-import { motion } from "framer-motion"
 
 import type{ ModalProps } from '../types'
 
@@ -20,8 +19,6 @@ const DayPage = ({ updateNote }: DayPageProps) => {
   const navigate = useNavigate()
   const location = useLocation()
   const [date, month, year] = location.pathname.replace('/','').split('.')
-
-  //console.log('state in DayPage: ', state)
 
   React.useEffect(()=>{
     const stringMonth = String(+month)
@@ -55,15 +52,19 @@ const DayPage = ({ updateNote }: DayPageProps) => {
     }
   }
 
+
   const navigateOnDrag = (offsetX: number) => {
     const currentDate = new Date(`${year}-${month}-${date}`)
-    if(offsetX < -150){
+    console.log(currentDate.toLocaleDateString())
+    if(offsetX < -125){
       currentDate.setDate(currentDate.getDate()+1)
-      navigate(`/${currentDate.toLocaleDateString()}`,{state:{prev: location.pathname}})
+      const path = `/${currentDate.getDate()}.${currentDate.getMonth()+1}.${currentDate.getFullYear()}`
+      navigate(path,{state:{prev: location.pathname}})
     }
-    else if(offsetX > 150){
+    else if(offsetX > 125){
       currentDate.setDate(currentDate.getDate()-1)
-      navigate(`/${currentDate.toLocaleDateString()}`,{state:{prev: location.pathname}})
+      const path = `/${currentDate.getDate()}.${currentDate.getMonth()+1}.${currentDate.getFullYear()}`
+      navigate(path,{state:{prev: location.pathname}})
     }
   }
 

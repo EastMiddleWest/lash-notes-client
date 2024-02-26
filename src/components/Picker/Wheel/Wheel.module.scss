@@ -1,0 +1,23 @@
+
+
+.wheel-old{
+  height: 150px;
+  width: 58px;
+  overflow-y: scroll;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y mandatory;
+  border: 2px solid black;
+  padding: 2px;
+}
+
+.wheel{
+  position: relative;
+  //width: 100px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y mandatory;
+}

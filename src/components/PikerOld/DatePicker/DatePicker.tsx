@@ -49,6 +49,8 @@ const DatePicker: React.FC<DatePickerProps> = ({dayValue,monthValue,yearValue,ch
 
   const [dates, setDates] = React.useState<string[]>([])
 
+  console.log(dayValue, monthValue, yearValue)
+
   React.useEffect(()=>{
     setDates(getDaysOfMonth(getDateString( monthValue, yearValue)))
   },[monthValue, yearValue])

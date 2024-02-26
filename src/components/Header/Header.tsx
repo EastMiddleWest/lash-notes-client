@@ -14,7 +14,7 @@ const Header = ({toggleModal}: HeaderProps) => {
   const {pathname} = useLocation()
 
   const handleShowAddModal = () => {
-    if(pathname.match(/[a-zA-Z]/)){
+    if(pathname.match(/[a-zA-Z]|\/(?!\d)/g)){
       const today = new Date()
       toggleModal({
         type: 'add note',
@@ -37,13 +37,14 @@ const Header = ({toggleModal}: HeaderProps) => {
       })
     } else {
       const date = pathname.replace('/','').split('.')
+      console.log('date frm path: ', date)
       toggleModal({
         type: 'add note',
         defaultData:{
           _id: '',
           day: String(+date[0]),
           month: String(+date[1]),
-          year: String(date[2]),
+          year: String(+date[2]),
           time:{
             from: '08:00',
             to: '09:00'

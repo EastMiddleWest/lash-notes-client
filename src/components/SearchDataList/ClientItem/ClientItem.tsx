@@ -21,7 +21,7 @@ const ClientItem = (props: ICustomer) => {
         </Link>
         {props.notes.length > 0 &&
         <button onClick={() => setIsOpen(prev => !prev)}>
-          <img className={isOpen ? styles['arrow-up'] : styles['arrow-down']} src='/public/chevron.png' width={18} height={18} />
+          <img className={isOpen ? styles['arrow-up'] : styles['arrow-down']} src='/chevron.png' width={18} height={18} />
         </button>}
       </p>
       <ul className={notelistClName}>
