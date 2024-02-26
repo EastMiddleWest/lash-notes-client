@@ -37,7 +37,6 @@ const NoteForm = ({type, handleClose, defaultData}: NoteFormProps) => {
     register,
     handleSubmit,
     control,
-    getValues,
     formState: { errors },
   } = useForm<Inputs>({defaultValues})
 
@@ -180,11 +179,6 @@ const NoteForm = ({type, handleClose, defaultData}: NoteFormProps) => {
           />}
         />
         </div>
-      </div>
-      <div>
-        <span>{getValues('date.day')}</span>
-        <span>{getValues('date.month')}</span>
-        <span>{getValues('date.year')}</span>
       </div>
       <Controller
       control={control}

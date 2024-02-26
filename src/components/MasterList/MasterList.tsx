@@ -41,6 +41,7 @@ const MasterList = ({data, updateNote}: MasterListProps) => {
             onClick={() => updateNote({type: 'update note', defaultData:el})}
           >
             <strong>{el.time.from +'-'+ el.time.to}</strong>
+            <p>{el.client.name}</p>
             <p>{el.content}</p>
           </div>
           )}
@@ -54,6 +55,7 @@ const MasterList = ({data, updateNote}: MasterListProps) => {
             onClick={() => updateNote({type: 'update note', defaultData:el})}
           >
             <strong>{el.time.from +'-'+ el.time.to}</strong>
+            <p>{el.client.name}</p>
             <p>{el.content}</p>
           </div>
           )}
