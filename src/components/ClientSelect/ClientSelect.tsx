@@ -39,7 +39,7 @@ const ClientSelect = ({value, onChange, error}: ClientSelectProps) => {
         placeholder='Клиент'
         cacheOptions
         loadOptions={loadOptions}
-        defaultOptions
+        //defaultOptions
         components={{ DropdownIndicator }}
         isMulti={false}
         noOptionsMessage={()=> 'Начните писать'}

@@ -40,7 +40,7 @@ const Wheel = ({value, values, isMonth,onChange}: WheelProps) => {
   React.useEffect(() => {
     let destroy: () => void
     if (divRef.current) {
-      destroy = createScrollStopListener(divRef.current, handler, 100)
+      destroy = createScrollStopListener(divRef.current, handler, 350)
       const index = values.indexOf(value) - 1;
       const position = index * 50;
       if(index >= 0) {
